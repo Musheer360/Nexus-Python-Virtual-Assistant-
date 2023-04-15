@@ -16,7 +16,7 @@ rate = engine.getProperty("rate")
 voices = engine.getProperty("voices")
 volume = engine.getProperty("volume")
 engine.setProperty("rate", 180)
-engine.setProperty("voice", voices[1].id)
+engine.setProperty("voice", voices[2].id)
 engine.setProperty("volume", 1)
 
 
@@ -59,13 +59,13 @@ def greet():
 def takecommand():
     r = sr.Recognizer()
     with sr.Microphone() as source:
-        print("Listening for input...")
+        print("\nListening for input...")
         audio = r.listen(source)
         r.energy_threshold = 1000
         try:
             text1 = r.recognize_google(audio)
             text = text1.lower()
-            print("You: " + text)
+            print("\nYou: " + text + "\n")
         except:
             return ""
         return text
@@ -117,7 +117,7 @@ while running:
     ):
         query1 = text.replace("wikipedia", "")
         query3 = query1.replace("about", "")
-        query4 = query3.replace("in", "")
+        query4 = query3.replace("on", "")
         query5 = query4.replace("for", "")
         query2 = query5.replace("search", "")
         query6 = query2
@@ -133,17 +133,34 @@ while running:
             webbrowser.get().open_new_tab(page2)
 
     elif text == "":
-        speak("I’m still listening...")
+        speak("I'm still listening...")
         continue
 
-    elif "what is" in text or "who is" in text:
+    elif (
+        "what is" in text
+        or "who is" in text
+        or "tell me" in text
+        or "how" in text
+        or "when" in text
+        or "where" in text
+        or "whose" in text
+        or "is this" in text
+    ):
         query1 = text.replace("what is", "").replace("who is", "")
-        speak("Here’s what I found for " + query1 + " on the Web.")
+        speak("Here's what I found for " + query1 + " on the Web.")
         wb.get().open_new_tab("www.google.com/search?gx&q=" + query1)
 
     elif "search for" in text and "on google" in text:
         query1 = (
-            text.replace("what is", "").replace("who is", "").replace("on google", "")
+            text.replace("what is", "")
+            .replace("who is", "")
+            .replace("on google", "")
+            .replace("tell me", "")
+            .replace("how", "")
+            .replace("when", "")
+            .replace("where", "")
+            .replace("whose", "")
+            .replace("is this", "")
         )
         query2 = query1.replace("search for", "")
         speak("Searching for" + query2 + " on Google")
@@ -182,7 +199,7 @@ while running:
             )
 
     elif "your name" in text:
-        speak("My name is Nexus, and I’m an AI assistant developed by Musheer.")
+        speak("My name is Nexus, and I'm an AI assistant developed by Musheer.")
     elif text in ["hi", "hello", "hai", "hello hai", "hello hi"]:
         speak("Hello, how may I assist you?")
     elif (
@@ -190,7 +207,7 @@ while running:
         or "how are you" in text
         or "what about you" in text
     ):
-        speak("I’m doing great, thank you for asking. How may I assist you?")
+        speak("I'm doing great, thank you for asking. How may I assist you?")
     elif (
         "who programmed you" in text
         or "who made you" in text
@@ -212,9 +229,10 @@ while running:
         x in text
         for x in [
             "tell me something about mushir",
-            "tell me something about mushir mlam",
+            "tell me something about mushir alam",
             "who is mushir alam",
             "who is mushir",
+            "tell me about mushir",
         ]
     ):
         speak(
@@ -252,7 +270,7 @@ while running:
         wb.get().open_new_tab("https://www.facebook.com")
     elif any(x in text for x in ["sing a song", "sing me a song"]):
         speak(
-            "I’m sorry As an AI virtual assistant, I don’t have the ability to sing, but I can definitely assist you with your requests or answer any questions you might have. How can I be of help to you today?"
+            "I'm sorry As an AI virtual assistant, I don't have the ability to sing, but I can definitely assist you with your requests or answer any questions you might have. How can I be of help to you today?"
         )
     elif "open opera" in text:
         speak("Sure, opening Opera GX Browser")
@@ -331,38 +349,38 @@ while running:
             "C:/ProgramData/Microsoft/Windows/Start Menu/Programs/Free Download Manager.lnk"
         )
     elif "open edge" in text or "open microsoft edge" in text:
-        speak("Certainly, I’m opening the Microsoft Edge Browser.")
+        speak("Certainly, I'm opening the Microsoft Edge Browser.")
         os.startfile(
             "C:/ProgramData/Microsoft/Windows/Start Menu/Programs/Microsoft Edge.lnk"
         )
     elif "open screen recorder" in text or "open recorder" in text:
-        speak("Certainly, I’m opening OBS Studio.")
+        speak("Certainly, I'm opening OBS Studio.")
         os.startfile(
             "C:/ProgramData/Microsoft/Windows/Start Menu/Programs/OBS Studio (64bit).lnk"
         )
     elif "open one drive" in text:
-        speak("Certainly, I’m opening OneDrive.")
+        speak("Certainly, I'm opening OneDrive.")
         os.startfile(
             "C:/ProgramData/Microsoft/Windows/Start Menu/Programs/OneDrive for Business.lnk"
         )
     elif "open one note" in text:
-        speak("Certainly, I’m opening OneNote.")
+        speak("Certainly, I'm opening OneNote.")
         os.startfile("C:/ProgramData/Microsoft/Windows/Start Menu/Programs/OneNote.lnk")
     elif "open outlook" in text:
-        speak("Certainly, I’m opening Outlook.")
+        speak("Certainly, I'm opening Outlook.")
         os.startfile("C:/ProgramData/Microsoft/Windows/Start Menu/Programs/Outlook.lnk")
     elif "open powerpoint" in text:
-        speak("Certainly, I’m opening PowerPoint.")
+        speak("Certainly, I'm opening PowerPoint.")
         os.startfile(
             "C:/ProgramData/Microsoft/Windows/Start Menu/Programs/PowerPoint.lnk"
         )
     elif "open publisher" in text:
-        speak("Certainly, I’m opening Publisher.")
+        speak("Certainly, I'm opening Publisher.")
         os.startfile(
             "C:/ProgramData/Microsoft/Windows/Start Menu/Programs/Publisher.lnk"
         )
     elif "open skype" in text:
-        speak("Certainly, I’m opening Skype for Business.")
+        speak("Certainly, I'm opening Skype for Business.")
         os.startfile(
             "C:/ProgramData/Microsoft/Windows/Start Menu/Programs/Skype for Business.lnk"
         )
@@ -429,56 +447,56 @@ while running:
         elif "no" in shutdown:
             speak("Alright, system shutdown cancelled.")
     elif "close access" in text or "close axis" in text or "close excess" in text:
-        speak("Okay, I’ll close Access.")
+        speak("Okay, I'll close Access.")
         os.system("TASKKILL /F /IM MSACCESS.exe")
     elif "close after effects" in text:
-        speak("Okay, I’ll close Adobe After Effects 2021.")
+        speak("Okay, I'll close Adobe After Effects 2021.")
         os.system("TASKKILL /F /IM AfterFX.exe")
     elif "close illustrator" in text:
-        speak("Okay, I’ll close Adobe Illustrator 2021.")
+        speak("Okay, I'll close Adobe Illustrator 2021.")
         os.system("TASKKILL /F /IM AIRobin.exe")
     elif "close spotify" in text:
-        speak("Okay, I’ll close Spotify.")
+        speak("Okay, I'll close Spotify.")
         os.system("TASKKILL /F /IM Spotify.exe")
     elif "close photoshop" in text:
-        speak("Okay, I’ll close Adobe Photoshop 2021.")
+        speak("Okay, I'll close Adobe Photoshop 2021.")
         os.system("TASKKILL /F /IM Photoshop.exe")
     elif "close pycharm" in text or "close python" in text:
-        speak("Okay, I’ll close PyCharm.")
+        speak("Okay, I'll close PyCharm.")
         os.system("TASKKILL /F /IM pycharm64.exe")
     elif "close bluestacks" in text:
-        speak("Okay, I’ll close BlueStacks.")
+        speak("Okay, I'll close BlueStacks.")
         os.system("TASKKILL /F /IM HD-Player.exe")
     elif "close excel" in text:
-        speak("Okay, I’ll close Excel.")
+        speak("Okay, I'll close Excel.")
         os.system("TASKKILL /F /IM EXCEL.EXE")
     elif "close youtube" in text:
-        speak("Okay, I’ll close YouTube.")
+        speak("Okay, I'll close YouTube.")
         pyautogui.hotkey("ctrl", "w")
     elif "close facebook" in text:
-        speak("Okay, I’ll close Facebook.")
+        speak("Okay, I'll close Facebook.")
         pyautogui.hotkey("ctrl", "w")
     elif "close task manager" in text:
-        speak("Okay, I’ll close Task Manager.")
+        speak("Okay, I'll close Task Manager.")
         os.system("TASKKILL /F /IM Taskmgr.exe")
     elif "close free download manager" in text:
-        speak("Okay, I’ll close Free Download Manager.")
+        speak("Okay, I'll close Free Download Manager.")
         os.system("TASKKILL /F /IM fdm.exe")
     elif "close edge" in text or "close microsoft edge" in text:
-        speak("Okay, I’ll close Microsoft Edge.")
+        speak("Okay, I'll close Microsoft Edge.")
         os.system("TASKKILL /F /IM msedge.exe")
     elif "close recorder" in text:
-        speak("Okay, I’ll close OBS Studio.")
+        speak("Okay, I'll close OBS Studio.")
         os.system("TASKKILL /F /IM obs64.exe")
     elif "close powerpoint" in text:
-        speak("Okay, I’ll close PowerPoint.")
+        speak("Okay, I'll close PowerPoint.")
         os.system("TASKKILL /F /IM POWERPNT.EXE")
     elif (
         "close word" in text
         or "close microsoft word" in text
         or "close ms word" in text
     ):
-        speak("Okay, I’ll close Word.")
+        speak("Okay, I'll close Word.")
         os.system("TASKKILL /F /IM winword.exe")
     elif "repeat" in text:
         speak('Okay, say "stop repeating" to stop.')
@@ -498,19 +516,19 @@ while running:
                 speak("Goodbye, have a great day.")
         speak("Hello again. What assistance do you require?")
     elif "show" in text and "mirror" in text or "open camera" in text:
-        speak("Okay, I’ll open the camera now.")
+        speak("Okay, I'll open the camera now.")
         os.system("start microsoft.windows.camera:")
     elif "close" in text and "camera" in text:
-        speak("Sure, I’ll close the camera for you.")
+        speak("Sure, I'll close the camera for you.")
         pyautogui.hotkey("alt", "f4")
     elif "search" in text and "in youtube" in text:
         search_text = text.replace("search", "").replace("in youtube", "")
-        speak("Alright, I’ll search for " + search_text + " on YouTube.")
+        speak("Alright, I'll search for " + search_text + " on YouTube.")
         webbrowser.get().open_new_tab(
             "https://www.youtube.com/results?search_query=" + search_text
         )
     elif "play" in text and ("music" in text or "playlist" in text):
-        speak("Okay, I’ll play your music now.")
+        speak("Okay, I'll play your music now.")
         os.system("spotify.exe")
         time.sleep(1)
         pyautogui.click(button="left")
@@ -531,11 +549,11 @@ while running:
                 os.system("TASKKILL /F /IM Spotify.exe")
         speak("Hello again, how can I assist you?")
     elif "open wikipedia" in text:
-        speak("Sure thing, I’ll open Wikipedia for you.")
+        speak("Sure thing, I'll open Wikipedia for you.")
         webbrowser.get().open_new_tab("https://www.wikipedia.org")
     else:
         speak(
-            "I’m sorry, I’m not able to assist with that, Would you like me to search for "
+            "I'm sorry, I'm not able to assist with that, Would you like me to search for "
             + text
             + " instead?"
         )
