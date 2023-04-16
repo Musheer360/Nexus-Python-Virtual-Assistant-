@@ -116,10 +116,10 @@ while running:
         or "wikipedia" in text
     ):
         query1 = text.replace("wikipedia", "")
-        query3 = query1.replace("about", "")
-        query4 = query3.replace("on", "")
-        query5 = query4.replace("for", "")
-        query2 = query5.replace("search", "")
+        query3 = query1.replace("about", " ")
+        query4 = query3.replace("on", " ")
+        query5 = query4.replace("for", " ")
+        query2 = query5.replace("search", " ")
         query6 = query2
         speak("Would you like me to read out the information or open the webpage?")
         answer = takecommand()
@@ -137,16 +137,26 @@ while running:
         continue
 
     elif (
-        "what is" in text
-        or "who is" in text
-        or "tell me" in text
-        or "how" in text
-        or "when" in text
-        or "where" in text
+        "what is the" in text
+        or "who is the" in text
+        or "who is your" in text
+        or "who is my" in text
+        or "tell me about" in text
+        or "tell me the" in text
+        or "how to" in text
+        or "when do" in text
+        or "where is" in text
         or "whose" in text
-        or "is this" in text
     ):
-        query1 = text.replace("what is", "").replace("who is", "")
+        query1 = (
+            text.replace("what is the", "")
+            .replace("who is the", "")
+            .replace("who is your", "")
+            .replace("who is my", "")
+            .replace("tell me about", "")
+            .replace("tell me the", "")
+            .replace("when", "")
+        )
         speak("Here's what I found for " + query1 + " on the Web.")
         wb.get().open_new_tab("www.google.com/search?gx&q=" + query1)
 
@@ -156,11 +166,7 @@ while running:
             .replace("who is", "")
             .replace("on google", "")
             .replace("tell me", "")
-            .replace("how", "")
-            .replace("when", "")
-            .replace("where", "")
-            .replace("whose", "")
-            .replace("is this", "")
+            .replace("tell me about", "")
         )
         query2 = query1.replace("search for", "")
         speak("Searching for" + query2 + " on Google")
@@ -198,7 +204,10 @@ while running:
                 "https://www.youtube.com/results?search_query=" + abc3
             )
 
-    elif "your name" in text:
+    elif (
+        text.strip().lower() == "what is your name"
+        or text.strip().lower() == "tell me your name"
+    ):
         speak("My name is Nexus, and I'm an AI assistant developed by Musheer.")
     elif text in ["hi", "hello", "hai", "hello hai", "hello hi"]:
         speak("Hello, how may I assist you?")
@@ -206,6 +215,7 @@ while running:
         text in ["i'm fine", "i am fine"]
         or "how are you" in text
         or "what about you" in text
+        or "whats up" in text
     ):
         speak("I'm doing great, thank you for asking. How may I assist you?")
     elif (
@@ -236,7 +246,7 @@ while running:
         ]
     ):
         speak(
-            "Musheer is a Computer Science student from India, who created me as a small project."
+            "Musheer is a Computer Science student from India, who created me as a hobby project."
         )
     elif any(x in text for x in ["thank you", "thanks"]):
         speak("You are welcome! Is there anything else I can help you with?")
@@ -359,23 +369,23 @@ while running:
             "C:/ProgramData/Microsoft/Windows/Start Menu/Programs/OBS Studio (64bit).lnk"
         )
     elif "open one drive" in text:
-        speak("Certainly, I'm opening OneDrive.")
+        speak("Certainly, I'm opening Microsoft OneDrive.")
         os.startfile(
             "C:/ProgramData/Microsoft/Windows/Start Menu/Programs/OneDrive for Business.lnk"
         )
     elif "open one note" in text:
-        speak("Certainly, I'm opening OneNote.")
+        speak("Certainly, I'm opening Microsoft OneNote.")
         os.startfile("C:/ProgramData/Microsoft/Windows/Start Menu/Programs/OneNote.lnk")
     elif "open outlook" in text:
-        speak("Certainly, I'm opening Outlook.")
+        speak("Certainly, I'm opening Microsoft Outlook.")
         os.startfile("C:/ProgramData/Microsoft/Windows/Start Menu/Programs/Outlook.lnk")
     elif "open powerpoint" in text:
-        speak("Certainly, I'm opening PowerPoint.")
+        speak("Certainly, I'm opening Microsoft PowerPoint.")
         os.startfile(
             "C:/ProgramData/Microsoft/Windows/Start Menu/Programs/PowerPoint.lnk"
         )
     elif "open publisher" in text:
-        speak("Certainly, I'm opening Publisher.")
+        speak("Certainly, I'm opening Microsoft Publisher.")
         os.startfile(
             "C:/ProgramData/Microsoft/Windows/Start Menu/Programs/Publisher.lnk"
         )
@@ -394,7 +404,7 @@ while running:
             "C:/Users/Musheer/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/Visual Studio Code/Visual Studio Code.lnk"
         )
     elif "open word" in text or "open ms word" in text or "open microsoft word" in text:
-        speak("Sure, launching Word.")
+        speak("Sure, launching Microsoft Word.")
         os.startfile("C:/ProgramData/Microsoft/Windows/Start Menu/Programs/Word.lnk")
         speak("Would you like me to type for you?")
         typin = takecommand()
