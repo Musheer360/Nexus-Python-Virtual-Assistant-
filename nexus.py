@@ -16,18 +16,18 @@ rate = engine.getProperty("rate")
 voices = engine.getProperty("voices")
 volume = engine.getProperty("volume")
 engine.setProperty("rate", 180)
-engine.setProperty("voice", voices[2].id)
+engine.setProperty("voice", voices[1].id)
 engine.setProperty("volume", 1)
 
 
 def speak(text):
     engine.say(text)
     engine.runAndWait()
-    print(text)
+    print("\033[32m\nNexus: " + text + "\033[0m")
 
 
 def wish(text):
-    print(text)
+    print("\033[32m" + text + "\033[0m")
     engine.say(text)
     engine.runAndWait()
 
@@ -59,13 +59,13 @@ def greet():
 def takecommand():
     r = sr.Recognizer()
     with sr.Microphone() as source:
-        print("\nListening for input...")
+        print("\033[93m" + "\nListening for input..." + "\033[0m")
         audio = r.listen(source)
         r.energy_threshold = 1000
         try:
             text1 = r.recognize_google(audio)
             text = text1.lower()
-            print("\nYou: " + text + "\n")
+            print("\033[94m\nYou: " + text + "\033[0m")
         except:
             return ""
         return text
@@ -80,7 +80,7 @@ def sleep():
         try:
             text1 = r.recognize_google(audio)
             text = text1.lower()
-            print("You: " + text)
+            print("\033[94m\nYou: " + text + "\033[0m")
         except:
             return "none"
         return text
@@ -124,7 +124,8 @@ while running:
         speak("Would you like me to read out the information or open the webpage?")
         answer = takecommand()
         if "narrate" in answer or "read" in answer:
-            results = wikipedia.summary(query6, sentences=1, auto_suggest=False)
+            results = wikipedia.summary(
+                query6, sentences=1, auto_suggest=False)
             speak("According to Wikipedia, " + results)
         elif "web page" in answer or "website" in answer or "webpage" in answer:
             page1 = wikipedia.page(query2, auto_suggest=False)
@@ -190,7 +191,8 @@ while running:
             speak("Would you like me to read out the information or open the webpage?")
             answer2 = takecommand()
             if "narrate" in answer2 or "read" in answer2:
-                results = wikipedia.summary(abc3, sentences=1, auto_suggest=False)
+                results = wikipedia.summary(
+                    abc3, sentences=1, auto_suggest=False)
                 speak("According to Wikipedia, " + results)
             elif "web page" in answer2 or "website" in answer2 or "webpage" in answer2:
                 page1 = wikipedia.page(abc3, auto_suggest=False)
@@ -284,7 +286,8 @@ while running:
         )
     elif "open opera" in text:
         speak("Sure, opening Opera GX Browser")
-        os.startfile("C:/Users/Musheer/AppData/Local/Programs/Opera GX/launcher.exe")
+        os.startfile(
+            "C:/Users/Musheer/AppData/Local/Programs/Opera GX/launcher.exe")
     elif any(x in text for x in ["open chrome", "open google chrome"]):
         speak("Okay, opening Chrome Browser")
         os.startfile(
@@ -315,7 +318,8 @@ while running:
         or "open microsoft access" in text
     ):
         speak("Sure, opening Microsoft Access.")
-        os.startfile("C:/ProgramData/Microsoft/Windows/Start Menu/Programs/Access.lnk")
+        os.startfile(
+            "C:/ProgramData/Microsoft/Windows/Start Menu/Programs/Access.lnk")
     elif "open photoshop" in text or "open adobe photoshop" in text:
         speak("Certainly, opening Adobe Photoshop.")
         os.startfile(
@@ -352,7 +356,8 @@ while running:
         or "open microsoft excel" in text
     ):
         speak("Sure, opening Microsoft Excel.")
-        os.startfile("C:/ProgramData/Microsoft/Windows/Start Menu/Programs/Excel.lnk")
+        os.startfile(
+            "C:/ProgramData/Microsoft/Windows/Start Menu/Programs/Excel.lnk")
     elif "open free download manager" in text:
         speak("Alright, opening Free Download Manager.")
         os.startfile(
@@ -375,10 +380,12 @@ while running:
         )
     elif "open one note" in text:
         speak("Certainly, I'm opening Microsoft OneNote.")
-        os.startfile("C:/ProgramData/Microsoft/Windows/Start Menu/Programs/OneNote.lnk")
+        os.startfile(
+            "C:/ProgramData/Microsoft/Windows/Start Menu/Programs/OneNote.lnk")
     elif "open outlook" in text:
         speak("Certainly, I'm opening Microsoft Outlook.")
-        os.startfile("C:/ProgramData/Microsoft/Windows/Start Menu/Programs/Outlook.lnk")
+        os.startfile(
+            "C:/ProgramData/Microsoft/Windows/Start Menu/Programs/Outlook.lnk")
     elif "open powerpoint" in text:
         speak("Certainly, I'm opening Microsoft PowerPoint.")
         os.startfile(
@@ -405,7 +412,8 @@ while running:
         )
     elif "open word" in text or "open ms word" in text or "open microsoft word" in text:
         speak("Sure, launching Microsoft Word.")
-        os.startfile("C:/ProgramData/Microsoft/Windows/Start Menu/Programs/Word.lnk")
+        os.startfile(
+            "C:/ProgramData/Microsoft/Windows/Start Menu/Programs/Word.lnk")
         speak("Would you like me to type for you?")
         typin = takecommand()
         if "yes" in typin:
@@ -583,7 +591,8 @@ while running:
                 )
                 answer2 = takecommand()
                 if "narrate" in answer2 or "direct" in answer2:
-                    results = wikipedia.summary(text, sentences=1, auto_suggest=False)
+                    results = wikipedia.summary(
+                        text, sentences=1, auto_suggest=False)
                     speak("according to wikipedia " + results)
                 elif (
                     "web page" in answer2
@@ -594,7 +603,8 @@ while running:
                     print(page1)
                     page2 = page1.url
                     print(page2)
-                    speak("Redirecting you to the " + text + " Wikipedia page.")
+                    speak("Redirecting you to the " +
+                          text + " Wikipedia page.")
                     webbrowser.get().open_new_tab(page2)
                     print(page2)
             elif "youtube" in answer4:
